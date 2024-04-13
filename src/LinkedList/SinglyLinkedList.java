@@ -61,6 +61,8 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
                 currentNode = currentNode.getNext();
             }
             Node<T> newNextNode = currentNode.getNext().getNext();
+            currentNode.getNext().setData(null);
+            currentNode.getNext().setNext(null);
             if (newNextNode == null) {
                 currentNode.setNext(null);
             } else {
