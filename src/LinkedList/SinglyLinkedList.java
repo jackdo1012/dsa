@@ -47,8 +47,16 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
         size++;
     }
 
+    /**
+     * Delete a node from the linked list at index
+     * 
+     * @param index the index of the node to delete, -1 to delete the last node
+     */
     @Override
     public void delete(int index) {
+        if (index == -1) {
+            index = size - 1;
+        }
         if (index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         } else if (isEmpty()) {

@@ -1,4 +1,5 @@
 import LinkedList.SinglyLinkedList;
+import Queue.LinkedListBasedQueue;
 import Stack.LinkedListBasedStack;
 
 public class App {
@@ -19,5 +20,11 @@ public class App {
         stack.push("value2");
         System.out.println(stack.pop());
         System.out.println(stack.size());
+
+        LinkedListBasedQueue<String> queue = new LinkedListBasedQueue<String>();
+        queue.enQueue("value1");
+        queue.enQueue("value2");
+        System.out.println(queue.deQueue());
+        System.out.println(queue.deQueue());
     }
 }
