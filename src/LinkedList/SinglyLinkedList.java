@@ -63,6 +63,7 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
             throw new IllegalArgumentException("Linked list is empty");
         } else if (index == 0) {
             deleteHead();
+            size--;
         } else {
             Node<T> currentNode = head;
             for (int i = 0; i < index - 1; i++) {
@@ -76,8 +77,8 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
             } else {
                 currentNode.setNext(newNextNode);
             }
+            size--;
         }
-        size--;
     }
 
     @Override
@@ -101,7 +102,7 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
 
     @Override
     public T getAt(int index) {
-        if (index >= size) {
+        if (index >= size || index < 0) {
             return null;
         }
         Node<T> currentNode = head;
@@ -136,11 +137,13 @@ public class SinglyLinkedList<T> implements LinkedListADT<T> {
     public void deleteHead() {
         if (size <= 1) {
             head = null;
+            size = 0;
         } else {
             Node<T> currentNode = head;
             head = head.getNext();
             currentNode.setData(null);
             currentNode.setNext(null);
+            size--;
         }
     }
 }

@@ -49,5 +49,4 @@ public class LinkedListBasedQueue<T> implements QueueADT<T> {
     public boolean isEmpty() {
         return linkedList.isEmpty();
     }
-
 }
