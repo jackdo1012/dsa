@@ -1,5 +1,6 @@
 import java.util.Iterator;
 
+import Array.DynamicArray;
 import LinkedList.SinglyLinkedList;
 import Queue.LinkedListBasedQueue;
 import Queue.PriorityQueue;
@@ -9,6 +10,15 @@ import Tree.TraverseType;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        DynamicArray<String> array = new DynamicArray<String>(5);
+        array.push("1data");
+        array.push("3data");
+        array.push("4data");
+        array.insert("2data", 1);
+        array.remove("3data");
+        array.removeAt(0);
+        System.out.println(array.toString());
+
         SinglyLinkedList<String> list = new SinglyLinkedList<String>();
         list.insert("3rd value", 0);
         list.insert("2nd value", 1);
