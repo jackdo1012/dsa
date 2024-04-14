@@ -42,13 +42,18 @@ public class App {
         binarySearchTree.insert(4);
         binarySearchTree.insert(7);
         binarySearchTree.insert(13);
+        binarySearchTree.delete(3);
         Iterator<Integer> binarySearchTreeTraverse = binarySearchTree.traverse(TraverseType.LEVELORDER);
-        while (binarySearchTreeTraverse.hasNext()) {
-            System.out.print(binarySearchTreeTraverse.next() + " ");
+        if (binarySearchTreeTraverse != null) {
+            while (binarySearchTreeTraverse.hasNext()) {
+                System.out.print(binarySearchTreeTraverse.next() + " ");
+            }
         }
         System.out.println("");
         System.out.println(binarySearchTree.height());
         System.out.println(binarySearchTree.findMax());
         System.out.println(binarySearchTree.findMin());
+        System.out.println(binarySearchTree.contains(11));
+        System.out.println(binarySearchTree.contains(10));
     }
 }

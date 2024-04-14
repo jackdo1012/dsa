@@ -10,6 +10,25 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     private int nodeCount = 0;
 
     @Override
+    public boolean contains(int data) {
+        return contains(this.root, data);
+    }
+
+    private boolean contains(Node root, int data) {
+        if (root == null) {
+            return false;
+        }
+        if (data == root.getData()) {
+            return true;
+        } else if (data < root.getData()) {
+            return contains(root.getLeftNode(), data);
+        } else if (data > root.getData()) {
+            return contains(root.getRightNode(), data);
+        }
+        return false;
+    }
+
+    @Override
     public int findMin() {
         Node current = root;
         while (current.getLeftNode() != null) {
@@ -59,7 +78,39 @@ public class BinarySearchTree implements BinarySearchTreeADT {
 
     @Override
     public void delete(int data) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (nodeCount != 0) {
+            if (contains(data)) {
+                this.root = delete(this.root, data);
+            }
+        }
+    }
+
+    private Node delete(Node root, int data) {
+        if (root != null) {
+            if (data > root.getData()) {
+                root.setRightNode(delete(root.getRightNode(), data));
+            } else if (data < root.getData()) {
+                root.setLeftNode(delete(root.getLeftNode(), data));
+            } else {
+                if (root.getLeftNode() == null) {
+                    return root.getRightNode();
+                } else if (root.getRightNode() == null) {
+                    return root.getLeftNode();
+                } else {
+                    Node temp = root.getRightNode();
+                    while (temp.getLeftNode() != null) {
+                        temp = temp.getLeftNode();
+                    }
+                    System.out.println(temp.getData());
+                    Node newNode = new Node(temp.getData());
+                    newNode.setLeftNode(root.getLeftNode());
+                    newNode.setRightNode(delete(root.getRightNode(), temp.getData()));
+                    // System.out.println(root.getData());
+                    return newNode;
+                }
+            }
+        }
+        return root;
     }
 
     @Override

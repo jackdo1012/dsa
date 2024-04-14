@@ -3,6 +3,8 @@ package Tree;
 import java.util.Iterator;
 
 public interface BinarySearchTreeADT {
+    boolean contains(int data);
+
     int findMin();
 
     int findMax();
