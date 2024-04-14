@@ -1,35 +1,35 @@
 package Tree;
 
-public class Node {
-    private int data;
-    private Node leftNode = null;
-    private Node rightNode = null;
+public class Node<T> {
+    private T data;
+    private Node<T> leftNode = null;
+    private Node<T> rightNode = null;
 
-    public Node(int newData) {
+    public Node(T newData) {
         data = newData;
     }
 
-    public int getData() {
+    public T getData() {
         return data;
     }
 
-    public Node getLeftNode() {
+    public Node<T> getLeftNode() {
         return leftNode;
     }
 
-    public Node getRightNode() {
+    public Node<T> getRightNode() {
         return rightNode;
     }
 
-    public void setData(int newData) {
+    public void setData(T newData) {
         data = newData;
     }
 
-    public void setLeftNode(Node newLeftNode) {
+    public void setLeftNode(Node<T> newLeftNode) {
         leftNode = newLeftNode;
     }
 
-    public void setRightNode(Node newRightNode) {
+    public void setRightNode(Node<T> newRightNode) {
         rightNode = newRightNode;
     }
 }

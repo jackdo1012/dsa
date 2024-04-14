@@ -2,20 +2,20 @@ package Tree;
 
 import java.util.Iterator;
 
-public interface BinarySearchTreeADT {
-    boolean contains(int data);
+public interface BinarySearchTreeADT<T> {
+    boolean contains(T data);
 
-    int findMin();
+    T findMin();
 
-    int findMax();
+    T findMax();
 
-    void insert(int data);
+    void insert(T data);
 
-    void delete(int data);
+    void delete(T data);
 
     int size();
 
     int height();
 
-    Iterator<Integer> traverse(TraverseType type);
+    Iterator<T> traverse(TraverseType type);
 }

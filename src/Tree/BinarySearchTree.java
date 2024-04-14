@@ -4,33 +4,33 @@ import java.util.Iterator;
 
 import Queue.LinkedListBasedQueue;
 
-public class BinarySearchTree implements BinarySearchTreeADT {
-    private Node root = null;
+public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTreeADT<T> {
+    private Node<T> root = null;
 
     private int nodeCount = 0;
 
     @Override
-    public boolean contains(int data) {
+    public boolean contains(T data) {
         return contains(this.root, data);
     }
 
-    private boolean contains(Node root, int data) {
+    private boolean contains(Node<T> root, T data) {
         if (root == null) {
             return false;
         }
-        if (data == root.getData()) {
+        if (data.compareTo((T) root.getData()) == 0) {
             return true;
-        } else if (data < root.getData()) {
+        } else if (data.compareTo((T) root.getData()) < 0) {
             return contains(root.getLeftNode(), data);
-        } else if (data > root.getData()) {
+        } else if (data.compareTo((T) root.getData()) > 0) {
             return contains(root.getRightNode(), data);
         }
         return false;
     }
 
     @Override
-    public int findMin() {
-        Node current = root;
+    public T findMin() {
+        Node<T> current = root;
         while (current.getLeftNode() != null) {
             current = current.getLeftNode();
         }
@@ -38,8 +38,8 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     }
 
     @Override
-    public int findMax() {
-        Node current = root;
+    public T findMax() {
+        Node<T> current = root;
         while (current.getRightNode() != null) {
             current = current.getRightNode();
         }
@@ -47,27 +47,27 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     }
 
     @Override
-    public void insert(int data) {
+    public void insert(T data) {
         insert(root, data);
     }
 
-    private void insert(Node root, int data) {
+    private void insert(Node<T> root, T data) {
         if (size() == 0) {
-            this.root = new Node(data);
+            this.root = new Node<T>(data);
             nodeCount++;
-        } else if (data < root.getData()) {
+        } else if (data.compareTo((T) root.getData()) < 0) {
             if (root.getLeftNode() != null) {
                 insert(root.getLeftNode(), data);
             } else {
-                Node newNode = new Node(data);
+                Node<T> newNode = new Node<T>(data);
                 root.setLeftNode(newNode);
                 nodeCount++;
             }
-        } else if (data > root.getData()) {
+        } else if (data.compareTo((T) root.getData()) > 0) {
             if (root.getRightNode() != null) {
                 insert(root.getRightNode(), data);
             } else {
-                Node newNode = new Node(data);
+                Node<T> newNode = new Node<T>(data);
                 root.setRightNode(newNode);
                 nodeCount++;
             }
@@ -77,7 +77,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     }
 
     @Override
-    public void delete(int data) {
+    public void delete(T data) {
         if (nodeCount != 0) {
             if (contains(data)) {
                 this.root = delete(this.root, data);
@@ -85,11 +85,11 @@ public class BinarySearchTree implements BinarySearchTreeADT {
         }
     }
 
-    private Node delete(Node root, int data) {
+    private Node<T> delete(Node<T> root, T data) {
         if (root != null) {
-            if (data > root.getData()) {
+            if (data.compareTo((T) root.getData()) > 0) {
                 root.setRightNode(delete(root.getRightNode(), data));
-            } else if (data < root.getData()) {
+            } else if (data.compareTo((T) root.getData()) < 0) {
                 root.setLeftNode(delete(root.getLeftNode(), data));
             } else {
                 if (root.getLeftNode() == null) {
@@ -97,15 +97,14 @@ public class BinarySearchTree implements BinarySearchTreeADT {
                 } else if (root.getRightNode() == null) {
                     return root.getLeftNode();
                 } else {
-                    Node temp = root.getRightNode();
+                    Node<T> temp = root.getRightNode();
                     while (temp.getLeftNode() != null) {
                         temp = temp.getLeftNode();
                     }
                     System.out.println(temp.getData());
-                    Node newNode = new Node(temp.getData());
+                    Node<T> newNode = new Node<T>(temp.getData());
                     newNode.setLeftNode(root.getLeftNode());
                     newNode.setRightNode(delete(root.getRightNode(), temp.getData()));
-                    // System.out.println(root.getData());
                     return newNode;
                 }
             }
@@ -123,7 +122,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
         return height(root);
     }
 
-    private int height(Node root) {
+    private int height(Node<T> root) {
         if (root == null) {
             return 0;
         }
@@ -137,8 +136,8 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     }
 
     @Override
-    public Iterator<Integer> traverse(TraverseType type) {
-        LinkedListBasedQueue<Integer> queue = new LinkedListBasedQueue<Integer>();
+    public Iterator<T> traverse(TraverseType type) {
+        LinkedListBasedQueue<T> queue = new LinkedListBasedQueue<T>();
         if (root == null) {
             return null;
         }
@@ -156,12 +155,12 @@ public class BinarySearchTree implements BinarySearchTreeADT {
                 break;
             }
             case LEVELORDER: {
-                LinkedListBasedQueue<Node> processQueue = new LinkedListBasedQueue<Node>();
+                LinkedListBasedQueue<Node<T>> processQueue = new LinkedListBasedQueue<Node<T>>();
                 levelOrderTraverse(queue, processQueue);
                 break;
             }
         }
-        Iterator<Integer> iterator = new Iterator<Integer>() {
+        Iterator<T> iterator = new Iterator<T>() {
 
             @Override
             public boolean hasNext() {
@@ -169,14 +168,14 @@ public class BinarySearchTree implements BinarySearchTreeADT {
             }
 
             @Override
-            public Integer next() {
+            public T next() {
                 return queue.deQueue();
             }
         };
         return iterator;
     }
 
-    private void preOrderTraverse(Node root, LinkedListBasedQueue<Integer> queue) {
+    private void preOrderTraverse(Node<T> root, LinkedListBasedQueue<T> queue) {
         if (root != null) {
             queue.enQueue(root.getData());
             preOrderTraverse(root.getLeftNode(), queue);
@@ -184,7 +183,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
         }
     }
 
-    private void inOrderTraverse(Node root, LinkedListBasedQueue<Integer> queue) {
+    private void inOrderTraverse(Node<T> root, LinkedListBasedQueue<T> queue) {
         if (root != null) {
             inOrderTraverse(root.getLeftNode(), queue);
             queue.enQueue(root.getData());
@@ -192,7 +191,7 @@ public class BinarySearchTree implements BinarySearchTreeADT {
         }
     }
 
-    private void postOrderTraverse(Node root, LinkedListBasedQueue<Integer> queue) {
+    private void postOrderTraverse(Node<T> root, LinkedListBasedQueue<T> queue) {
         if (root != null) {
             postOrderTraverse(root.getLeftNode(), queue);
             postOrderTraverse(root.getRightNode(), queue);
@@ -200,11 +199,11 @@ public class BinarySearchTree implements BinarySearchTreeADT {
         }
     }
 
-    private void levelOrderTraverse(LinkedListBasedQueue<Integer> queue,
-            LinkedListBasedQueue<Node> processQueue) {
+    private void levelOrderTraverse(LinkedListBasedQueue<T> queue,
+            LinkedListBasedQueue<Node<T>> processQueue) {
         processQueue.enQueue(this.root);
         while (!processQueue.isEmpty()) {
-            Node temp = processQueue.deQueue();
+            Node<T> temp = processQueue.deQueue();
             queue.enQueue(temp.getData());
             if (temp.getLeftNode() != null) {
                 processQueue.enQueue(temp.getLeftNode());

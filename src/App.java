@@ -32,7 +32,7 @@ public class App {
         System.out.println(queue.deQueue());
         System.out.println(queue.deQueue());
 
-        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<Integer>();
         binarySearchTree.insert(8);
         binarySearchTree.insert(3);
         binarySearchTree.insert(10);
