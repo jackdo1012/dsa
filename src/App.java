@@ -2,6 +2,7 @@ import java.util.Iterator;
 
 import LinkedList.SinglyLinkedList;
 import Queue.LinkedListBasedQueue;
+import Queue.PriorityQueue;
 import Stack.LinkedListBasedStack;
 import Tree.BinarySearchTree;
 import Tree.TraverseType;
@@ -42,7 +43,16 @@ public class App {
         binarySearchTree.insert(4);
         binarySearchTree.insert(7);
         binarySearchTree.insert(13);
+        /*  8
+           / \
+          3   10
+         / \    \
+        1   6    14
+           / \   /
+          4   7 13
+        */
         binarySearchTree.delete(3);
+        binarySearchTree.deleteMax();
         Iterator<Integer> binarySearchTreeTraverse = binarySearchTree.traverse(TraverseType.LEVELORDER);
         if (binarySearchTreeTraverse != null) {
             while (binarySearchTreeTraverse.hasNext()) {
@@ -55,5 +65,14 @@ public class App {
         System.out.println(binarySearchTree.findMin());
         System.out.println(binarySearchTree.contains(11));
         System.out.println(binarySearchTree.contains(10));
+
+        PriorityQueue<String> priorityQueue = new PriorityQueue<String>();
+        priorityQueue.insert(100000, "this one is important");
+        priorityQueue.insert(200000, "this one is very important");
+        priorityQueue.insert(1, "this one is not important");
+        System.out.println(priorityQueue.deleteMax());
+        System.out.println(priorityQueue.deleteMin());
+        System.out.println(priorityQueue.getMax());
+        System.out.println(priorityQueue.getMin());
     }
 }

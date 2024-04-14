@@ -13,6 +13,10 @@ public interface BinarySearchTreeADT<T> {
 
     void delete(T data);
 
+    T deleteMax();
+
+    T deleteMin();
+
     int size();
 
     int height();

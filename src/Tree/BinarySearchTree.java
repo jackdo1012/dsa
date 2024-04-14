@@ -30,6 +30,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
 
     @Override
     public T findMin() {
+        if (size() == 0) {
+            return null;
+        }
         Node<T> current = root;
         while (current.getLeftNode() != null) {
             current = current.getLeftNode();
@@ -39,6 +42,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
 
     @Override
     public T findMax() {
+        if (size() == 0) {
+            return null;
+        }
         Node<T> current = root;
         while (current.getRightNode() != null) {
             current = current.getRightNode();
@@ -83,6 +89,50 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
                 this.root = delete(this.root, data);
             }
         }
+    }
+
+    @Override
+    public T deleteMax() {
+        if (height() == 0) {
+            return null;
+        } else if (height() == 1) {
+            T data = this.root.getData();
+            this.root = null;
+            return data;
+        }
+        Node<T> temp = this.root;
+        while (temp.getRightNode().getRightNode() != null) {
+            temp = temp.getRightNode();
+        }
+        T data = temp.getRightNode().getData();
+        if (temp.getRightNode().getLeftNode() != null) {
+            temp.setRightNode(temp.getRightNode().getLeftNode());
+        } else {
+            temp.setRightNode(null);
+        }
+        return data;
+    }
+
+    @Override
+    public T deleteMin() {
+        if (height() == 0) {
+            return null;
+        } else if (height() == 1) {
+            T data = this.root.getData();
+            this.root = null;
+            return data;
+        }
+        Node<T> temp = this.root;
+        while (temp.getLeftNode().getLeftNode() != null) {
+            temp = temp.getLeftNode();
+        }
+        T data = temp.getLeftNode().getData();
+        if (temp.getLeftNode().getRightNode() != null) {
+            temp.setLeftNode(temp.getLeftNode().getRightNode());
+        } else {
+            temp.setLeftNode(null);
+        }
+        return data;
     }
 
     private Node<T> delete(Node<T> root, T data) {
