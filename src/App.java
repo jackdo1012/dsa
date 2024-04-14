@@ -33,16 +33,18 @@ public class App {
         System.out.println(queue.deQueue());
 
         BinarySearchTree binarySearchTree = new BinarySearchTree();
-        binarySearchTree.insert(5);
-        binarySearchTree.insert(4);
-        binarySearchTree.insert(6);
-        binarySearchTree.insert(7);
+        binarySearchTree.insert(8);
         binarySearchTree.insert(3);
-        binarySearchTree.insert(2);
         binarySearchTree.insert(10);
-        Iterator<Integer> binarySearchTreeTraverse = binarySearchTree.traverse(TraverseType.INORDER);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(6);
+        binarySearchTree.insert(14);
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(7);
+        binarySearchTree.insert(13);
+        Iterator<Integer> binarySearchTreeTraverse = binarySearchTree.traverse(TraverseType.LEVELORDER);
         while (binarySearchTreeTraverse.hasNext()) {
-            System.out.print(binarySearchTreeTraverse.next());
+            System.out.print(binarySearchTreeTraverse.next() + " ");
         }
         System.out.println("");
         System.out.println(binarySearchTree.height());

@@ -88,6 +88,9 @@ public class BinarySearchTree implements BinarySearchTreeADT {
     @Override
     public Iterator<Integer> traverse(TraverseType type) {
         LinkedListBasedQueue<Integer> queue = new LinkedListBasedQueue<Integer>();
+        if (root == null) {
+            return null;
+        }
         switch (type) {
             case INORDER: {
                 inOrderTraverse(this.root, queue);
@@ -102,6 +105,8 @@ public class BinarySearchTree implements BinarySearchTreeADT {
                 break;
             }
             case LEVELORDER: {
+                LinkedListBasedQueue<Node> processQueue = new LinkedListBasedQueue<Node>();
+                levelOrderTraverse(queue, processQueue);
                 break;
             }
         }
@@ -141,6 +146,21 @@ public class BinarySearchTree implements BinarySearchTreeADT {
             postOrderTraverse(root.getLeftNode(), queue);
             postOrderTraverse(root.getRightNode(), queue);
             queue.enQueue(root.getData());
+        }
+    }
+
+    private void levelOrderTraverse(LinkedListBasedQueue<Integer> queue,
+            LinkedListBasedQueue<Node> processQueue) {
+        processQueue.enQueue(this.root);
+        while (!processQueue.isEmpty()) {
+            Node temp = processQueue.deQueue();
+            queue.enQueue(temp.getData());
+            if (temp.getLeftNode() != null) {
+                processQueue.enQueue(temp.getLeftNode());
+            }
+            if (temp.getRightNode() != null) {
+                processQueue.enQueue(temp.getRightNode());
+            }
         }
     }
 }
