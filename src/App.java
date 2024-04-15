@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.Iterator;
 
+import Algorithm.Sort;
 import Array.DynamicArray;
 import LinkedList.SinglyLinkedList;
 import Queue.LinkedListBasedQueue;
@@ -84,5 +86,12 @@ public class App {
         System.out.println(priorityQueue.deleteMin());
         System.out.println(priorityQueue.getMax());
         System.out.println(priorityQueue.getMin());
+
+        int[] sortArray = { 13, 32, 11, 4, 75, 23, 56, 78, 53, 123, 55, 778, 11223, 12451, 35675346, 11234, 67, 623,
+                1234, 7, 785, 38753, 68956, 3257, 88564 };
+
+        Sort sort = new Sort();
+        int[] bubbleSortArray = sort.bubbleSort(sortArray.clone());
+        System.out.println(Arrays.toString(bubbleSortArray));
     }
 }

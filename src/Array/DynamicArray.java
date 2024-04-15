@@ -16,6 +16,12 @@ public class DynamicArray<T> implements Iterable<T>, DynamicArrayADT<T> {
         this.size = 0;
     }
 
+    private DynamicArray(T[] data, int capacity, int size) {
+        this.data = data;
+        this.capacity = capacity;
+        this.size = size;
+    }
+
     @SuppressWarnings("unchecked")
     private T[] newArr() {
         return (T[]) new Object[this.capacity * 2];
@@ -140,5 +146,9 @@ public class DynamicArray<T> implements Iterable<T>, DynamicArrayADT<T> {
         }
         sb.append(this.data[size - 1]).append("]");
         return sb.toString();
+    }
+
+    public DynamicArray<T> clone() {
+        return new DynamicArray<T>(this.data, this.capacity, this.size);
     }
 }
