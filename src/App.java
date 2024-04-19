@@ -95,5 +95,7 @@ public class App {
         System.out.println(Arrays.toString(bubbleSortArray));
         int[] selectionSortArray = sort.bubbleSort(sortArray.clone());
         System.out.println(Arrays.toString(selectionSortArray));
+        int[] insertionSortArray = sort.insertionSort(sortArray.clone());
+        System.out.println(Arrays.toString(insertionSortArray));
     }
 }

@@ -46,4 +46,31 @@ public class Sort {
 
         return arr;
     }
+
+    public int[] insertionSort(int[] arr) {
+        long startTime = System.nanoTime();
+
+        int key, j;
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] > arr[i]) {
+                // variable "key" is the data needed to be placed again in the correct place
+                key = arr[i];
+                j = i;
+                // check if the left index of the current index is greater than the key, if so shift the left index into the current
+                while (j > 0 && arr[j - 1] > key) {
+                    arr[j] = arr[j - 1];
+                    j -= 1;
+                }
+                // place key into the correct place
+                arr[j] = key;
+            }
+        }
+
+        long endTime = System.nanoTime();
+        long time = (endTime - startTime);
+        System.out.println("Insertion sort time: " + time);
+
+        return arr;
+    }
 }
